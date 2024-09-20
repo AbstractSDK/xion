@@ -363,6 +363,10 @@ func NewWasmApp(
 		panic(err)
 	}
 
+	// Override Wasm size limitation from WASMD.
+	wasmtypes.MaxWasmSize = 3 * 1024 * 1024
+	wasmtypes.MaxProposalWasmSize = wasmtypes.MaxWasmSize
+
 	app := &WasmApp{
 		BaseApp:           bApp,
 		legacyAmino:       legacyAmino,

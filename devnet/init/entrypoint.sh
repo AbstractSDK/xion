@@ -111,6 +111,9 @@ initialize_genesis(){
     sed -e "s/stake/${DENOM}/g" \
         -i ${HOME}/.*/config/genesis.json
 
+    jq '.app_state.abstractaccount.params.allow_all_code_ids = true' \
+        ${HOME}/.*/config/genesis.json
+        
     # modify the genesis.json
     jq --slurpfile wasm ${HOME}/init/wasm-genesis.json '.app_state.wasm |= $wasm[0].wasm' ${HOME}/.*/config/genesis.json \
     > ${HOME}/.shared/genesis.json
